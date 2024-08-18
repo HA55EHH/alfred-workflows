@@ -1,9 +1,9 @@
-#!/bin/bash
+#!/bin/zsh
 readonly workflow_dir="${1}"
 readonly info_plist="${workflow_dir}/info.plist"
 
 if [[ "$#" -ne 1 ]] || [[ ! -f "${info_plist}" ]]; then
-  echo 'You need to give this script a single argument: the path to a valid workflow directory.'
+  echo 'You need to provide a single argument: the path to a valid workflow directory.'
   exit 1
 fi
 

@@ -1,22 +1,24 @@
-#!/bin/bash
+#!/bin/zsh
 readonly workflow_dir="${1}"
-readonly info_plist="${workflow_dir}/info.plist"
+readonly plist="${workflow_dir}/info.plist"
 
-if [[ "$#" -ne 1 ]] || [[ ! -f "${info_plist}" ]]; then
-  echo 'You need to give this script a single argument: the path to a valid workflow directory.'
-  echo 'The workflow will be saved to the Desktop.'
+if [[ "$#" -ne 1 ]] || [[ ! -f "${plist}" ]]; then
+  echo 'You need to provide a single argument: the path to a valid workflow directory.'
   exit 1
 fi
 
-readonly workflow_name="$(/usr/libexec/PlistBuddy -c 'print name' "${info_plist}")"
+readonly workflow_name="$(/usr/libexec/PlistBuddy -c 'print name' "${plist}")"
 readonly workflow_file="${workflow_dir}/${workflow_name}.alfredworkflow"
 
-if /usr/libexec/PlistBuddy -c 'print variablesdontexport' "${info_plist}" &> /dev/null; then
+if /usr/libexec/PlistBuddy -c 'print variablesdontexport' "${plist}" &> /dev/null; then
   readonly workflow_dir_to_package="$(mktemp -d)"
   /bin/cp -R "${workflow_dir}/"* "${workflow_dir_to_package}"
 
-  readonly tmp_info_plist="${workflow_dir_to_package}/info.plist"
-  /usr/libexec/PlistBuddy -c 'Print variablesdontexport' "${tmp_info_plist}" | grep '    ' | sed -E 's/ {4}//' | xargs -I {} /usr/libexec/PlistBuddy -c "Set variables:'{}' ''" "${tmp_info_plist}"
+  readonly tmp_plist="${workflow_dir_to_package}/info.plist"
+  /usr/libexec/PlistBuddy -c 'Print variablesdontexport' "${tmp_plist}" | \
+    grep '    ' | \
+    sed -E 's/ {4}//' | \
+    xargs -I {} /usr/libexec/PlistBuddy -c "Set variables:'{}' ''" "${tmp_plist}"
 else
   readonly workflow_dir_to_package="${workflow_dir}"
 fi
