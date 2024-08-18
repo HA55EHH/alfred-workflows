@@ -43,7 +43,7 @@ do
     all_issues=$(echo "$all_issues$issues" | jq -s 'add')
 
     total=$(echo "$response" | jq '.total')
-    start_at=$(($start_at + $max_results))
+    start_at=$(($start_at + 100))
 
     if [ $start_at -ge $total ]; then
         break

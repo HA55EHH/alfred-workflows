@@ -556,7 +556,9 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>open "$alfred_workflow_cache"</string>
+				<string>open "$alfred_workflow_cache"
+
+echo "Opening workflow cache: $alfred_workflow_cache" &gt;&amp;2</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -654,15 +656,17 @@
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>0</integer>
+				<integer>102</integer>
 				<key>script</key>
-				<string></string>
+				<string>rm -rf "${alfred_workflow_cache:?}/"*
+
+echo "Cleared cache: ${alfred_workflow_cache:?}" &gt;&amp;2</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>src/clear_cache.sh</string>
+				<string></string>
 				<key>type</key>
-				<integer>8</integer>
+				<integer>11</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
@@ -779,6 +783,8 @@ This workflow caches responses from the Jira API for responsivenes, then updates
 		</dict>
 		<key>6EAE9ED1-3A5B-4692-8A44-3989D3555CC2</key>
 		<dict>
+			<key>note</key>
+			<string>Clear Workflow cache directory</string>
 			<key>xpos</key>
 			<real>395</real>
 			<key>ypos</key>

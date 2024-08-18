@@ -16,7 +16,9 @@ if [ ! -f "$cache_file" ]; then
     ./src/get_issues.sh > "$cache_file"
 fi
 
-# Load the contents of ~/issue-cache.json into a variable
+echo "Found cache: $cache_file" >&2
+
+# Load the contents of issue-cache.json into a variable
 cache_content=$(jq -r '.[] | "\(.title)\t\(.subtitle)\t\(.arg)"' < "$cache_file")
 
 # Filter the contents of issue-cache.json, querying title only by concatenating
