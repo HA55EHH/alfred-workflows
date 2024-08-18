@@ -9,7 +9,7 @@ if [[ "$#" -ne 1 ]] || [[ ! -f "${info_plist}" ]]; then
 fi
 
 readonly workflow_name="$(/usr/libexec/PlistBuddy -c 'print name' "${info_plist}")"
-readonly workflow_file="${HOME}/Desktop/${workflow_name}.alfredworkflow"
+readonly workflow_file="${workflow_dir}/${workflow_name}.alfredworkflow"
 
 if /usr/libexec/PlistBuddy -c 'print variablesdontexport' "${info_plist}" &> /dev/null; then
   readonly workflow_dir_to_package="$(mktemp -d)"
