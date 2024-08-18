@@ -1,19 +1,16 @@
 #!/bin/bash
-file="$alfred_workflow_cache/issues-cache.json"
 
-# create the directory if it doesn't already exist
-mkdir -p "$alfred_workflow_cache"
-
-echo "Updating $file for projects: $projects." >&2
-max_results=100
 start_at=0
-total=1  # initialize total to enter the loop
-all_issues="[]"  # initialize an empty JSON array
+all_issues="[]"
 
-while [ $start_at -lt $total ]
+url="https://$domain/rest/api/3/search"
+
+echo "Sending request to $url to retrieve issues for projects: $projects" >&2
+
+while :
 do
     response=$(curl --silent --request POST \
-        --url "https://$domain/rest/api/3/search" \
+        --url "$url" \
         --user "$email:$api_token" \
         --header "Accept: application/json" \
         --header "Content-Type: application/json" \
@@ -25,19 +22,22 @@ do
         ],
         \"fieldsByKeys\": false,
         \"jql\": \"project in ($projects) and statusCategory!=Done\",
-        \"maxResults\": $max_results,
+        \"maxResults\": 100,
         \"startAt\": $start_at
     }")
 
-    issues=$(
-    echo "$response" | jq '[
+    if [ -z "$response" ]; then
+        echo "Error: Empty response from the API" >&2
+        exit 1
+    fi
+
+    issues=$(echo "$response" | jq '[
         .issues[] | {
             title: (.key + " - " + .fields.summary),
             subtitle: (.fields.assignee.displayName + " (" + .fields.status.name + ")"),
             arg: .key
         }
-    ]'
-    )
+    ]')
 
     # Concatenate the issues to the all_issues array
     all_issues=$(echo "$all_issues$issues" | jq -s 'add')
@@ -45,7 +45,9 @@ do
     total=$(echo "$response" | jq '.total')
     start_at=$(($start_at + $max_results))
 
+    if [ $start_at -ge $total ]; then
+        break
+    fi
 done
 
-echo "$all_issues" > "$file"
-echo "$file updated!" >&2
+echo "$all_issues"
