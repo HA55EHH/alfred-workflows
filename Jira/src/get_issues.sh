@@ -32,13 +32,16 @@ do
         exit 1
     fi
 
-    issues=$(echo "$response" | jq '[
+    # download and process avatars
+    ./src/get_avatars.sh "$response"
+
+    issues=$(echo "$response" | jq --arg alfred_cache "$alfred_workflow_cache" '[
         .issues[] | {
             title: (.key + " - " + .fields.summary),
-            subtitle: (.fields.assignee.displayName + " (" + .fields.status.name + ")"),
+            subtitle: (if .fields.assignee != null then .fields.assignee.displayName + " (" + .fields.status.name + ")" else "Unassigned (" + .fields.status.name + ")" end),
             arg: .key,
             icon: {
-                path: ("./images/" + .fields.issuetype.name + ".svg")
+                path: (if .fields.assignee != null then $alfred_cache + "/" + .fields.assignee.displayName + ".png" else "./images/Unassigned.svg" end)
             }
         }
     ]')
