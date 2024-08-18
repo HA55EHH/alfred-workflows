@@ -32,19 +32,36 @@ do
         exit 1
     fi
 
-    # download and process avatars
-    ./src/get_avatars.sh "$response"
 
-    issues=$(echo "$response" | jq --arg alfred_cache "$alfred_workflow_cache" '[
-        .issues[] | {
-            title: (.key + " - " + .fields.summary),
-            subtitle: (if .fields.assignee != null then .fields.assignee.displayName + " (" + .fields.status.name + ")" else "Unassigned (" + .fields.status.name + ")" end),
-            arg: .key,
-            icon: {
-                path: (if .fields.assignee != null then $alfred_cache + "/" + .fields.assignee.displayName + ".png" else "./images/Unassigned.svg" end)
+    if [ "$avatars" = 1 ]; then
+        # download and process avatars
+        ./src/get_avatars.sh "$response"
+
+        issues=$(echo "$response" | jq --arg alfred_cache "$alfred_workflow_cache" '[
+            .issues[] | {
+                title: (.key + " - " + .fields.summary),
+                subtitle: (if .fields.assignee != null then .fields.assignee.displayName + " (" + .fields.status.name + ")" else "Unassigned (" + .fields.status.name + ")" end),
+                arg: .key,
+                icon: {
+                    path: (if .fields.assignee != null then $alfred_cache + "/" + .fields.assignee.displayName + ".png" else "./images/Unassigned.svg" end)
+                }
             }
-        }
-    ]')
+        ]')
+    
+    else
+
+        issues=$(echo "$response" | jq --arg alfred_cache "$alfred_workflow_cache" '[
+            .issues[] | {
+                title: (.key + " - " + .fields.summary),
+                subtitle: (if .fields.assignee != null then .fields.assignee.displayName + " (" + .fields.status.name + ")" else "Unassigned (" + .fields.status.name + ")" end),
+                arg: .key,
+                icon: {
+                    path: ( "./images/" + .fields.issuetype.name + ".svg")
+                }
+            }
+        ]')
+
+    fi
 
     # Concatenate the issues to the all_issues array
     all_issues=$(echo "$all_issues$issues" | jq -s 'add')

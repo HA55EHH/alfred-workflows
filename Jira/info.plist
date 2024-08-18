@@ -737,10 +737,14 @@ The workflow has a few dependencies which can be installed via [Homebrew](https:
 	- `brew install jq`
 - `fzf`: a command line tool for fuzzy searching ([source code](https://github.com/junegunn/fzf))
 	- `brew install fzf`
+- `imagemagick`: a command line tool for manipulating images ([source code](https://github.com/ImageMagick/ImageMagick))
+	- `brew install imagemagick`
 
 ### Troubleshooting
 
-This workflow caches responses from the Jira API for responsivenes, then updates the caches when the command is run. If you are experiencing issues you may need to clear the cache using the `jwd` command.</string>
+This workflow caches responses from the Jira API for responsivenes, then updates the caches when the command is run. If you are experiencing issues you may need to clear the cache using the `jwd` command.
+
+Enabling avatars in the workflow config requires `imagemagick` to process the images to have circlular backgrounds as Jira generates and aligns the "initials" avatar images inconsistently.</string>
 	<key>uidata</key>
 	<dict>
 		<key>047412A9-78A7-428C-A030-748FF15F46B1</key>
@@ -762,7 +766,7 @@ This workflow caches responses from the Jira API for responsivenes, then updates
 			<key>xpos</key>
 			<real>370</real>
 			<key>ypos</key>
-			<real>700</real>
+			<real>710</real>
 		</dict>
 		<key>17324341-BE6A-4CE3-B220-B21268F33285</key>
 		<dict>
@@ -873,7 +877,7 @@ This workflow caches responses from the Jira API for responsivenes, then updates
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>700</real>
+			<real>710</real>
 		</dict>
 		<key>D6692AEC-683E-41A0-B420-A158C718187E</key>
 		<dict>
@@ -1018,9 +1022,28 @@ This workflow caches responses from the Jira API for responsivenes, then updates
 			<key>variable</key>
 			<string>issue_types</string>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<true/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+			</dict>
+			<key>description</key>
+			<string>Show avatars images for Jira issues, otherwise will default to using issue type icons e.g. story, task, bug etc.</string>
+			<key>label</key>
+			<string>Avatar Icons</string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>avatars</string>
+		</dict>
 	</array>
 	<key>version</key>
-	<string></string>
+	<string>0.0.1</string>
 	<key>webaddress</key>
 	<string></string>
 </dict>

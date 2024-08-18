@@ -18,7 +18,11 @@ The workflow has a few dependencies which can be installed via [Homebrew](https:
 	- `brew install jq`
 - `fzf`: a command line tool for fuzzy searching ([source code](https://github.com/junegunn/fzf))
 	- `brew install fzf`
+- `imagemagick`: a command line tool for manipulating images ([source code](https://github.com/ImageMagick/ImageMagick))
+	- `brew install imagemagick`
 
 ### Troubleshooting
 
 This workflow caches responses from the Jira API for responsivenes, then updates the caches when the command is run. If you are experiencing issues you may need to clear the cache using the `jwd` command.
+
+Enabling avatars in the workflow config requires `imagemagick` to process the images to have circlular backgrounds as Jira generates and aligns the "initials" avatar images inconsistently.
