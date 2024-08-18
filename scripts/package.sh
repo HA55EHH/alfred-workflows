@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 readonly workflow_dir="${1}"
 readonly info_plist="${workflow_dir}/info.plist"
 

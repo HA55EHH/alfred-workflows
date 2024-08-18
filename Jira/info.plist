@@ -320,83 +320,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>testing</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string></string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>D6692AEC-683E-41A0-B420-A158C718187E</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>behaviour</key>
-				<integer>0</integer>
-				<key>fontmode</key>
-				<integer>0</integer>
-				<key>fontsizing</key>
-				<integer>0</integer>
-				<key>footertext</key>
-				<string></string>
-				<key>inputfile</key>
-				<string></string>
-				<key>inputtype</key>
-				<integer>0</integer>
-				<key>loadingtext</key>
-				<string></string>
-				<key>outputmode</key>
-				<integer>0</integer>
-				<key>scriptinput</key>
-				<integer>0</integer>
-				<key>spellchecking</key>
-				<integer>0</integer>
-				<key>stackview</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.userinterface.text</string>
-			<key>uid</key>
-			<string>5CDFA8FD-FA93-43C0-A283-6A7773726C5D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>src/get_boards.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>3220C0F3-7882-48BA-BC72-A5118C1BC659</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -647,6 +570,83 @@ echo "Opening workflow cache: $alfred_workflow_cache" &gt;&amp;2</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>:jtest</string>
+				<key>subtext</key>
+				<string>Run the currently configured Jira test script and display results (for development use only).</string>
+				<key>text</key>
+				<string>Jira Test Command</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>D6692AEC-683E-41A0-B420-A158C718187E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>behaviour</key>
+				<integer>0</integer>
+				<key>fontmode</key>
+				<integer>0</integer>
+				<key>fontsizing</key>
+				<integer>0</integer>
+				<key>footertext</key>
+				<string></string>
+				<key>inputfile</key>
+				<string></string>
+				<key>inputtype</key>
+				<integer>0</integer>
+				<key>loadingtext</key>
+				<string></string>
+				<key>outputmode</key>
+				<integer>0</integer>
+				<key>scriptinput</key>
+				<integer>0</integer>
+				<key>spellchecking</key>
+				<integer>0</integer>
+				<key>stackview</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.userinterface.text</string>
+			<key>uid</key>
+			<string>5CDFA8FD-FA93-43C0-A283-6A7773726C5D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>src/get_boards.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>3220C0F3-7882-48BA-BC72-A5118C1BC659</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>conditions</key>
 				<array>
 					<dict>
@@ -717,29 +717,36 @@ echo "Cleared cache: ${alfred_workflow_cache:?}" &gt;&amp;2</string>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>## Jira Workflow
+	<string># Jira Workflow
 
-A workflow to help with basic Jira navigation e.g. opening tickets and boards.
+An Alfred workflow to help with basic Jira navigation e.g. opening tickets and boards.
 
-## Commands
+### Commands
 
 - `ji`: Searches Jira for issues relating to the projects you have defined in the workflow configuration, then opens the selected issue in your default browser.
 - `jb`: Searches Jira for boards relating to the projects you have defined in the workflow configuration, then opens the selected board in your default browser.
-- `jc`: Clears the workflow cache.
+- `jwd`: Misc workflow debugging commands e.g. clearing and opening workflow cache directory.
 
-## Pre-requisites
+### Prerequisites
 
-You will need a Jira account and an API token.
+You will need a Jira account and an [API token](https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/).
 
-## Troubleshooting
+The workflow has a few dependencies which can be installed via [Homebrew](https://brew.sh/):
 
-This workflow caches responses from the Jira API for responsivenes, then updates the caches when the command is run. If you are experiencing issues you may need to clear the cache using the `jc` command.</string>
+- `jq`: a command line tool for parsing JSON ([source code](https://github.com/jqlang/jq))
+	- `brew install jq`
+- `fzf`: a command line tool for fuzzy searching ([source code](https://github.com/junegunn/fzf))
+	- `brew install fzf`
+
+### Troubleshooting
+
+This workflow caches responses from the Jira API for responsivenes, then updates the caches when the command is run. If you are experiencing issues you may need to clear the cache using the `jwd` command.</string>
 	<key>uidata</key>
 	<dict>
 		<key>047412A9-78A7-428C-A030-748FF15F46B1</key>
 		<dict>
 			<key>xpos</key>
-			<real>530</real>
+			<real>475</real>
 			<key>ypos</key>
 			<real>285</real>
 		</dict>
@@ -748,21 +755,21 @@ This workflow caches responses from the Jira API for responsivenes, then updates
 			<key>xpos</key>
 			<real>220</real>
 			<key>ypos</key>
-			<real>975</real>
+			<real>1010</real>
 		</dict>
 		<key>0FCAD52F-95E1-4B57-A18D-AC7E6E263061</key>
 		<dict>
 			<key>xpos</key>
-			<real>460</real>
+			<real>370</real>
 			<key>ypos</key>
-			<real>735</real>
+			<real>700</real>
 		</dict>
 		<key>17324341-BE6A-4CE3-B220-B21268F33285</key>
 		<dict>
 			<key>note</key>
 			<string>Open Jira Issue</string>
 			<key>xpos</key>
-			<real>325</real>
+			<real>270</real>
 			<key>ypos</key>
 			<real>125</real>
 		</dict>
@@ -773,7 +780,7 @@ This workflow caches responses from the Jira API for responsivenes, then updates
 			<key>xpos</key>
 			<real>470</real>
 			<key>ypos</key>
-			<real>445</real>
+			<real>430</real>
 		</dict>
 		<key>29AAF465-BAA7-4739-B2D5-EFFDDAED2FE1</key>
 		<dict>
@@ -782,28 +789,32 @@ This workflow caches responses from the Jira API for responsivenes, then updates
 			<key>xpos</key>
 			<real>395</real>
 			<key>ypos</key>
-			<real>865</real>
+			<real>900</real>
 		</dict>
 		<key>302541E2-8B34-44C3-8CEE-C38671C34B3C</key>
 		<dict>
+			<key>note</key>
+			<string>Split ID,Key</string>
 			<key>xpos</key>
 			<real>225</real>
 			<key>ypos</key>
-			<real>545</real>
+			<real>530</real>
 		</dict>
 		<key>3220C0F3-7882-48BA-BC72-A5118C1BC659</key>
 		<dict>
 			<key>xpos</key>
-			<real>985</real>
+			<real>845</real>
 			<key>ypos</key>
-			<real>340</real>
+			<real>1000</real>
 		</dict>
 		<key>41373026-FB14-4512-B59B-7F3E948EA41E</key>
 		<dict>
+			<key>note</key>
+			<string>Debug Commands</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>950</real>
+			<real>985</real>
 		</dict>
 		<key>5B3C60A0-B72E-4FAD-9979-990C94CF6342</key>
 		<dict>
@@ -812,17 +823,19 @@ This workflow caches responses from the Jira API for responsivenes, then updates
 			<key>xpos</key>
 			<real>470</real>
 			<key>ypos</key>
-			<real>585</real>
+			<real>570</real>
 		</dict>
 		<key>5CDFA8FD-FA93-43C0-A283-6A7773726C5D</key>
 		<dict>
 			<key>xpos</key>
-			<real>1150</real>
+			<real>1010</real>
 			<key>ypos</key>
-			<real>340</real>
+			<real>1000</real>
 		</dict>
 		<key>666CA455-5F67-488C-BB91-363355E5B743</key>
 		<dict>
+			<key>note</key>
+			<string>Fuzzy Search Jira Boards</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -835,14 +848,14 @@ This workflow caches responses from the Jira API for responsivenes, then updates
 			<key>xpos</key>
 			<real>395</real>
 			<key>ypos</key>
-			<real>1015</real>
+			<real>1080</real>
 		</dict>
 		<key>90B9BE5C-50C3-4294-8982-46560097CF0A</key>
 		<dict>
 			<key>note</key>
 			<string>Update Issue Cache</string>
 			<key>xpos</key>
-			<real>325</real>
+			<real>270</real>
 			<key>ypos</key>
 			<real>285</real>
 		</dict>
@@ -851,28 +864,30 @@ This workflow caches responses from the Jira API for responsivenes, then updates
 			<key>xpos</key>
 			<real>310</real>
 			<key>ypos</key>
-			<real>535</real>
+			<real>520</real>
 		</dict>
 		<key>CC14582D-7452-43E3-8D4C-D1AF65940D1F</key>
 		<dict>
+			<key>note</key>
+			<string>Update Board Cache</string>
 			<key>xpos</key>
-			<real>290</real>
+			<real>200</real>
 			<key>ypos</key>
-			<real>730</real>
+			<real>700</real>
 		</dict>
 		<key>D6692AEC-683E-41A0-B420-A158C718187E</key>
 		<dict>
 			<key>xpos</key>
-			<real>815</real>
+			<real>675</real>
 			<key>ypos</key>
-			<real>335</real>
+			<real>995</real>
 		</dict>
 		<key>E8CF80B3-B890-4533-B308-7113ABE857C3</key>
 		<dict>
 			<key>note</key>
 			<string>Fuzzy Search Jira Issues</string>
 			<key>xpos</key>
-			<real>85</real>
+			<real>30</real>
 			<key>ypos</key>
 			<real>230</real>
 		</dict>
@@ -892,7 +907,7 @@ This workflow caches responses from the Jira API for responsivenes, then updates
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Your Atlassian account domain</string>
+			<string>Your Atlassian account domain.</string>
 			<key>label</key>
 			<string>Domain</string>
 			<key>type</key>
@@ -913,7 +928,7 @@ This workflow caches responses from the Jira API for responsivenes, then updates
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Your Atlassian account email address</string>
+			<string>Your Atlassian account email address.</string>
 			<key>label</key>
 			<string>Email</string>
 			<key>type</key>
@@ -934,7 +949,7 @@ This workflow caches responses from the Jira API for responsivenes, then updates
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>The API token used to send requests to Jira</string>
+			<string>The API token used to send requests to Jira.</string>
 			<key>label</key>
 			<string>API Token</string>
 			<key>type</key>
@@ -974,7 +989,7 @@ This workflow caches responses from the Jira API for responsivenes, then updates
 				<string></string>
 			</dict>
 			<key>description</key>
-			<string>Filter projects using the project keys you defined above when searching for projects.</string>
+			<string>Filter board results using the project keys when using the `jb` command.</string>
 			<key>label</key>
 			<string>Pre-Filter Projects</string>
 			<key>type</key>
