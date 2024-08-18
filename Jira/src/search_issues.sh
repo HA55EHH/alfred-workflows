@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 # Search query i.e. everything typed after the keyword
 query="$1"

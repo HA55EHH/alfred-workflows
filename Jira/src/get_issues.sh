@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 start_at=0
 all_issues="[]"

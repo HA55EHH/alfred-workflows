@@ -1,3 +1,4 @@
+#!/bin/zsh
 response="$1"
 
 # Assume $response contains issues

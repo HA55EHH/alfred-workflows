@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 max_results=50
 all_boards="[]"
