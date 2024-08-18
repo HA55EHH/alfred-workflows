@@ -18,22 +18,21 @@ fi
 
 echo "Found cache: $cache_file" >&2
 
-# Load the contents of issue-cache.json into a variable
-cache_content=$(jq -r '.[] | "\(.title)\t\(.subtitle)\t\(.arg)"' < "$cache_file")
+# Load the conte# Load the contents of issue-cache.json into a variable
+cache_content=$(jq -r '.[] | "\(.title)\t\(.subtitle)\t\(.arg)\t\(.icon.path)"' < "$cache_file")
 
 # Filter the contents of issue-cache.json, querying title only by concatenating
-# title, subtitle and arg with tabs then telling fzf to split on tab and query only the
-# first result. We require title, subtitle and arg in the result, hence the concat.
+# title, subtitle, arg, and icon path with tabs then telling fzf to split on tab and query only the
+# first result. We require title, subtitle, arg, and icon in the result, hence the concat.
 result=$(echo "$cache_content" | fzf --with-nth=1 --delimiter="\t" --filter="$query")
 
-# Split the result back into title, subtitle and arg results, put them into an array and
+# Split the result back into title, subtitle, arg, and icon results, put them into an array and
 # finally pretty print the array
 items=$(
-    jq -nR 'inputs | split("\t") | {title: .[0], subtitle: .[1], arg: .[2]}' <<< "$result" |
+    jq -nR 'inputs | split("\t") | {title: .[0], subtitle: .[1], arg: .[2], icon: {path: .[3]}}' <<< "$result" |
     jq -cs '{items: .}' |
     jq '.'
 )
-
 # Output the final JSON structure to Alfred
 cat << EOB
 $items

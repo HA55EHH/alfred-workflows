@@ -633,7 +633,7 @@ echo "Opening workflow cache: $alfred_workflow_cache" &gt;&amp;2</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>src/get_boards.sh</string>
+				<string>src/get_issues.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -996,6 +996,27 @@ This workflow caches responses from the Jira API for responsivenes, then updates
 			<string>checkbox</string>
 			<key>variable</key>
 			<string>filter_projects</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>story,task,bug,epic</string>
+				<key>placeholder</key>
+				<string>story,task,bug,epic</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>What types of issues you want to appear in the results e.g. story, task, epic, bug</string>
+			<key>label</key>
+			<string>Issue Types</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>issue_types</string>
 		</dict>
 	</array>
 	<key>version</key>

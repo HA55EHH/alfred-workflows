@@ -18,10 +18,11 @@ do
             \"fields\": [
             \"summary\",
             \"status\",
+            \"issuetype\",
             \"assignee\"
         ],
         \"fieldsByKeys\": false,
-        \"jql\": \"project in ($projects) and statusCategory!=Done\",
+        \"jql\": \"project in ($projects) and statusCategory!=Done and issuetype in ($issue_types)\",
         \"maxResults\": 100,
         \"startAt\": $start_at
     }")
@@ -35,7 +36,10 @@ do
         .issues[] | {
             title: (.key + " - " + .fields.summary),
             subtitle: (.fields.assignee.displayName + " (" + .fields.status.name + ")"),
-            arg: .key
+            arg: .key,
+            icon: {
+                path: ("./images/" + .fields.issuetype.name + ".svg")
+            }
         }
     ]')
 
