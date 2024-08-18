@@ -4,7 +4,7 @@
 query="$1"
 
 # store cache file in workflow cache (alfred_ variables are default workflow variables)
-cache_file="$alfred_workflow_cache/boards-cache.json"
+cache_file="$alfred_workflow_cache/board-cache.json"
 
 # create the directory if it doesn't already exist
 mkdir -p "$alfred_workflow_cache"
@@ -13,11 +13,12 @@ mkdir -p "$alfred_workflow_cache"
 echo "Checking for cache file in: $cache_file" >&2
 if [ ! -f "$cache_file" ]; then
     echo "Cannot find cache file. Querying Jira API." >&2
-    ./src/request_boards.sh 
+    ./src/get_boards.sh > "$cache_file"
 fi
 
 cache_content=$(jq -c '.' < "$cache_file")
 
+# Pre-filters the projects to those defined in the workflow configuration
 if [ "$filter_projects" = 1 ]; then
     # Convert $projects to a jq array
     projects_array=$(echo "$projects" | jq -R 'split(",")')
@@ -43,7 +44,7 @@ items=$(
     jq '.items |= map(select(.title != null))'
 )
 
-# items=$(echo "$items" | jq '.items += [{"title": "All Projects", "subtitle": "", "arg": null}]')
+# If items is empty, add a default command to search Jira boards via the browser
 items=$(
     echo "$items" | jq '
     if .items | length == 0 then
